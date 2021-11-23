@@ -1037,9 +1037,12 @@ static int http_client_prepare_first_line(esp_http_client_handle_t client, int w
         http_header_set_format(client->request->headers, "Content-Length", "%d", write_len);
     } else {
         esp_http_client_set_header(client, "Transfer-Encoding", "chunked");
-        esp_http_client_set_method(client, HTTP_METHOD_POST);
+        #warning "ESP_IDF mark len -1 is post method, but bytech server mark as put"
+        // esp_http_client_set_method(client, HTTP_METHOD_POST);
+         esp_http_client_set_method(client, HTTP_METHOD_PUT);
     }
 
+    ESP_LOGE(TAG, "http_client_prepare_first_line method %s", HTTP_METHOD_MAPPING[client->connection_info.method]);
     const char *method = HTTP_METHOD_MAPPING[client->connection_info.method];
 
     int first_line_len = snprintf(client->request->buffer->data,

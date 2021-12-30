@@ -824,7 +824,7 @@ void taskYIELD_OTHER_CORE( BaseType_t xCoreID, UBaseType_t uxPriority )
 		}
 		#else /* portSTACK_GROWTH */
 		{
-		StackType_t *pxStack;
+		    StackType_t *pxStack;
 
 			/* Allocate space for the stack used by the task being created. */
 			pxStack = pvPortMallocStackMem( ( ( ( size_t ) usStackDepth ) * sizeof( StackType_t ) ) ); /*lint !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack and this allocation is the stack. */
